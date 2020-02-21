@@ -24,10 +24,9 @@ namespace MyShop.UI.Controllers
         public async Task<IActionResult> GetProduct(int id) => Ok(await new GetProduct(_ctx).Do(id));
 
         [HttpPost("products")]
-        public async Task<IActionResult> CreateProduct(CreateProduct.ProductViewModel vm) 
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProduct.Request request) 
         {
-            await new CreateProduct(_ctx).Do(vm);
-            return Ok();
+            return Ok(await new CreateProduct(_ctx).Do(request));
         }
 
         [HttpDelete("products/{id}")]
@@ -38,10 +37,9 @@ namespace MyShop.UI.Controllers
         }
 
         [HttpPut("products")]
-        public async Task<IActionResult> UpdateProduct(UpdateProduct.ProductViewModel vm) 
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProduct.Request request) 
         {
-            await new UpdateProduct(_ctx).Do(vm);
-            return Ok();
+            return Ok(await new UpdateProduct(_ctx).Do(request));
         }
     }
 }
