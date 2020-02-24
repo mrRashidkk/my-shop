@@ -23,7 +23,7 @@ namespace MyShop.Application.ProductsAdmin
                 Id = x.Id, 
                 Name = x.Name,
                 Description = x.Description,
-                Value = $"$ {x.Value.ToString("N2")}"
+                Value = x.Value.ToString("N2")
             }).FirstOrDefaultAsync(x => x.Id == id);
         }
 
