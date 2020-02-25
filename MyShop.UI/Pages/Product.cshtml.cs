@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyShop.Database;
 using MyShop.Application.Products;
+using Microsoft.AspNetCore.Http;
+using MyShop.Application.Cart;
+using MyShop.Domain.Models;
 
 namespace MyShop.UI.Pages
 {
@@ -13,6 +16,9 @@ namespace MyShop.UI.Pages
     {
         private readonly ApplicationDBContext _ctx;
         public GetProduct.ProductViewModel Product { get; set; }
+        [BindProperty]
+        public AddToCart.Request CartViewModel { get; set; }
+        
         public ProductModel(ApplicationDBContext ctx)
         {
             _ctx = ctx;
@@ -29,5 +35,12 @@ namespace MyShop.UI.Pages
             }
             return Page();
         }
+
+        public async Task<IActionResult> OnPost()
+        {
+            new AddToCart(HttpContext.Session).Do(CartViewModel);
+
+            return RedirectToPage("Cart");
+        }        
     }
 }

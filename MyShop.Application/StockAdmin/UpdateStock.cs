@@ -33,7 +33,7 @@ namespace MyShop.Application.StockAdmin
                 });
             }
 
-            _ctx.Stocks.UpdateRange(stocks);
+            _ctx.Stock.UpdateRange(stocks);
             await _ctx.SaveChangesAsync();
 
             return new Response

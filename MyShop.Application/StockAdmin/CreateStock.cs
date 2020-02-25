@@ -24,7 +24,7 @@ namespace MyShop.Application.StockAdmin
                 Qty = request.Qty,
                 ProductId = request.ProductId
             };
-            _ctx.Stocks.Add(stock);
+            _ctx.Stock.Add(stock);
             await _ctx.SaveChangesAsync();
 
             return new Response
