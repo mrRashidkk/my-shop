@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Database;
+using Stripe;
 
 namespace MyShop.UI
 {
@@ -41,6 +42,15 @@ namespace MyShop.UI
                 options.Cookie.Name = "Cart";
                 options.Cookie.MaxAge = TimeSpan.FromDays(365);
             });
+
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            var stripeService = new PaymentIntentService();
+            var stripeOptions = new PaymentIntentCreateOptions
+            {
+                Amount = 1099,
+                Currency = "usd",
+            };
+            stripeService.Create(stripeOptions);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
