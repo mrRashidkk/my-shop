@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using MyShop.Application.Cart;
+using MyShop.Application.Orders;
 using MyShop.Database;
 using Stripe;
 
@@ -36,9 +37,28 @@ namespace MyShop.UI.Pages.Checkout
             return Page();
         }
 
-        public IActionResult OnPost(string stripeEmail, string stripeToken)
+        public async Task<IActionResult> OnPost(string stripeEmail, string stripeToken)
         {
-            //var cardOrder = new GetOrder(HttpContext.Session, _ctx).Do();
+            var cardOrder = new Application.Cart.GetOrder(HttpContext.Session, _ctx).Do();
+
+            await new CreateOrder(_ctx).Do(new CreateOrder.Request
+            {
+                FirstName = cardOrder.CustomerInformation.FirstName,
+                LastName = cardOrder.CustomerInformation.LastName,
+                Email = cardOrder.CustomerInformation.Email,
+                PhoneNumber = cardOrder.CustomerInformation.PhoneNumber,
+                Address1 = cardOrder.CustomerInformation.Address1,
+                Address2 = cardOrder.CustomerInformation.Address2,
+                City = cardOrder.CustomerInformation.City,
+                PostCode = cardOrder.CustomerInformation.PostCode,
+
+                Stocks = cardOrder.Products.Select(x => new CreateOrder.Stock
+                {
+                    StockId = x.StockId,
+                    Qty = x.Qty
+                }).ToList()
+
+            });
 
             return RedirectToPage("/Index");
         }
