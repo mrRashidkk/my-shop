@@ -41,8 +41,11 @@ namespace MyShop.UI.Pages.Checkout
         {
             var cardOrder = new Application.Cart.GetOrder(HttpContext.Session, _ctx).Do();
 
+            var sessionId = HttpContext.Session.Id;
+
             await new CreateOrder(_ctx).Do(new CreateOrder.Request
             {
+                SessionId = sessionId,
                 FirstName = cardOrder.CustomerInformation.FirstName,
                 LastName = cardOrder.CustomerInformation.LastName,
                 Email = cardOrder.CustomerInformation.Email,

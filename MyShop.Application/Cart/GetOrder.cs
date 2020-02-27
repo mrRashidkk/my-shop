@@ -12,7 +12,7 @@ namespace MyShop.Application.Cart
 {
     public class GetOrder
     {
-        private readonly ISession _session;
+        private ISession _session;
         private readonly ApplicationDBContext _ctx;
 
         public GetOrder(ISession session, ApplicationDBContext ctx)

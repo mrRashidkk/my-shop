@@ -9,7 +9,7 @@ namespace MyShop.Application.Cart
 {
     public class GetCustomerInformation
     {
-        private readonly ISession _session;
+        private ISession _session;
 
         public GetCustomerInformation(ISession session)
         {

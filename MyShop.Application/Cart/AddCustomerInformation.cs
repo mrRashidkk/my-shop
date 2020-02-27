@@ -11,7 +11,7 @@ namespace MyShop.Application.Cart
 {
     public class AddCustomerInformation
     {
-        private readonly ISession _session;
+        private ISession _session;
 
         public AddCustomerInformation(ISession session)
         {

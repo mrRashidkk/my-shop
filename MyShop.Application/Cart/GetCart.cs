@@ -13,7 +13,7 @@ namespace MyShop.Application.Cart
 {
     public class GetCart
     {
-        private readonly ISession _session;
+        private ISession _session;
         private readonly ApplicationDBContext _ctx;
 
         public GetCart(ISession session, ApplicationDBContext ctx)
