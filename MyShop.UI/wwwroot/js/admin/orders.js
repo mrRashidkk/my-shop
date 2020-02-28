@@ -23,7 +23,7 @@
                     this.loading = false;
                 });
         },
-        selectedOrder(id) {
+        selectOrder(id) {
             this.loading = true;
             axios.get('/orders/' + id)
                 .then(result =>

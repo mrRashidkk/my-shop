@@ -18,12 +18,15 @@ namespace MyShop.Application.Products
 
         public async Task<IEnumerable<ProductViewModel>> Do()
         {
-            return await _ctx.Products.Select(x => new ProductViewModel
-            {
-                Name = x.Name,
-                Description = x.Description,
-                Value = $"${x.Value.ToString("N2")}"
-            }).ToListAsync();
+            return await _ctx.Products
+                .Include(x => x.Stock)
+                .Select(x => new ProductViewModel
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                    Value = $"${x.Value.ToString("N2")}",
+                    StockCount = x.Stock.Sum(y => y.Qty)
+                }).ToListAsync();
         }
 
         public class ProductViewModel
@@ -31,6 +34,7 @@ namespace MyShop.Application.Products
             public string Name { get; set; }
             public string Description { get; set; }
             public string Value { get; set; }
+            public int StockCount { get; set; }
         }
     }    
 }

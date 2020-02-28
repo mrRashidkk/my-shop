@@ -13,22 +13,16 @@ namespace MyShop.UI.Controllers
     [Authorize(Policy = "Manager")]
     public class OrdersController : Controller
     {
-        private ApplicationDBContext _ctx;
-        public OrdersController(ApplicationDBContext ctx)
-        {
-            _ctx = ctx;
-        }
-
         [HttpGet]
-        public IActionResult GetOrders(int status) => Ok(new GetOrders(_ctx).Do(status));
+        public IActionResult GetOrders([FromServices] GetOrders getOrders, int status) => Ok(getOrders.Do(status));
 
         [HttpGet("{id}")]
-        public IActionResult GetOrder(int id) => Ok(new GetOrder(_ctx).Do(id));        
+        public IActionResult GetOrder([FromServices] GetOrder getOrder, int id) => Ok(getOrder.Do(id));        
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(int id)
+        public async Task<IActionResult> UpdateOrder([FromServices] UpdateOrder updateOrder, int id)
         {
-            return Ok(await new UpdateOrder(_ctx).Do(id));
+            return Ok(await updateOrder.Do(id));
         }
     }
 }

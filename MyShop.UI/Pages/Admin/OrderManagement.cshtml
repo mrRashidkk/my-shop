@@ -7,9 +7,9 @@
     <div v-if="selectedOrder === null">
         <div class="tabs is-centered">
             <ul>
-                <li v-bind:class="{'is-active': stastus === 0}"><a @@click="status = 0">Pending</a></li>
-                <li v-bind:class="{'is-active': stastus === 1}"><a @@click="status = 1">Packed</a></li>
-                <li v-bind:class="{'is-active': stastus === 2}"><a @@click="status = 2">Shipped</a></li>
+                <li v-bind:class="{'is-active': status === 0}"><a @@click="status = 0">Pending</a></li>
+                <li v-bind:class="{'is-active': status === 1}"><a @@click="status = 1">Packed</a></li>
+                <li v-bind:class="{'is-active': status === 2}"><a @@click="status = 2">Shipped</a></li>
             </ul>
         </div>
         <div v-if="orders.length > 0">
