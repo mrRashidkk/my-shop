@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace MyShop.UI.Pages.Accounts
+{
+    public class LoginModel : PageModel
+    {
+        private SignInManager<IdentityUser> _signInManager;
+        [BindProperty]
+        public LoginViewModel Input { get; set; }
+
+        public LoginModel(SignInManager<IdentityUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
+
+        public void OnGet()
+        {
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, false, false);
+
+            if(result.Succeeded)
+            {
+                return RedirectToPage("/Admin/Index");
+            }
+            return Page();
+        }
+    }
+
+    public class LoginViewModel
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+}

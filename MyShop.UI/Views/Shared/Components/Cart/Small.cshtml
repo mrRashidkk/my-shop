@@ -1,17 +1,9 @@
-﻿@model IEnumerable<MyShop.Application.Cart.GetCart.Response>
-
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model string
 @{
 
 }
 
-<div>
-    <h2>Small cart component</h2>
-    @foreach (var product in Model)
-    {
-        <div>
-            <span>@product.Name -</span>
-            <span>@product.Value -</span>
-            <span>@product.Qty -</span>
-        </div>
-    }
-</div>
+<a class="navbar-item" asp-page="/Cart">
+    Cart @Model
+</a>

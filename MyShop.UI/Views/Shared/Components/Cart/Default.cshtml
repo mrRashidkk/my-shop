@@ -5,9 +5,22 @@
 }
 
     <div>
-        <h2>Big cart component</h2>
+        <p class="title">Cart</p>
         @foreach (var product in Model)
         {
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-64x64">
+                <img src="~/images/item.jpg" />
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                
+            </div>            
+        </div>        
+    </article>
+
             <p>@product.Name</p>
             <p>@product.Value</p>
             <p>@product.Qty</p>
