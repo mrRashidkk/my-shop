@@ -37,13 +37,21 @@ namespace MyShop.Application.Cart
                 return false;
             }
 
-            _ctx.StocksOnHold.Add(new StockOnHold
+            if (stockOnHold.Any(x => x.StockId == request.StockId))
             {
-                SessionId = _session.Id,
-                StockId = stockToHold.Id,
-                Qty = request.Qty,
-                ExpiryDate = DateTime.Now.AddMinutes(20)
-            });
+                stockOnHold.Find(x => x.StockId == request.StockId).Qty += request.Qty;
+            }
+            else
+            {
+                _ctx.StocksOnHold.Add(new StockOnHold
+                {
+                    SessionId = _session.Id,
+                    StockId = stockToHold.Id,
+                    Qty = request.Qty,
+                    ExpiryDate = DateTime.Now.AddMinutes(20)
+                });
+            }
+            
             stockToHold.Qty = stockToHold.Qty - request.Qty;
 
             foreach(var stock in stockOnHold)
