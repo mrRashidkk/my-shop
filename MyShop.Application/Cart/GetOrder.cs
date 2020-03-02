@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using MyShop.Domain.Models;
 using MyShop.Database;
-using Newtonsoft.Json;
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
 {
     public class GetOrder
     {
-        private ISession _session;
-        private readonly ApplicationDBContext _ctx;
+        private readonly ISessionManager _sessionManager;
 
-        public GetOrder(ISession session, ApplicationDBContext ctx)
+        public GetOrder(ISessionManager sessionManager)
         {
-            _session = session;
-            _ctx = ctx;
+            _sessionManager = sessionManager;
         }
 
         public class Response
@@ -52,25 +46,16 @@ namespace MyShop.Application.Cart
 
         public Response Do()
         {
-            var cart = _session.GetString("cart");            
-
-            var cartList = JsonConvert.DeserializeObject<List<CartProduct>>(cart);
-
-            var listOfProducts = _ctx.Stock
-                .Include(x => x.Product)
-                .Where(x => cartList.Any(y => y.StockId == x.Id))
-                .Select(x => new Product
+            var listOfProducts = _sessionManager
+                .GetCart(x => new Product
                 {
                     ProductId = x.ProductId,
-                    StockId = x.Id,
-                    Value = (int) (x.Product.Value * 100),
-                    Qty = cartList.FirstOrDefault(y => y.StockId == x.Id).Qty
-                })
-                .ToList();
+                    StockId = x.StockId,
+                    Value = (int)(x.Value * 100),
+                    Qty = x.Qty
+                });            
 
-            var customerInfoString = _session.GetString("customer-info");
-
-            var customerInformation = JsonConvert.DeserializeObject<MyShop.Domain.Models.CustomerInformation>(customerInfoString);
+            var customerInformation = _sessionManager.GetCustomerInformation();
 
             return new Response 
             {

@@ -1,19 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using MyShop.Domain.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
 {
     public class GetCustomerInformation
     {
-        private ISession _session;
+        private readonly ISessionManager _sessionManager;
 
-        public GetCustomerInformation(ISession session)
+        public GetCustomerInformation(ISessionManager sessionManager)
         {
-            _session = session;
+            _sessionManager = sessionManager;
         }
 
         public class Response
@@ -30,12 +25,10 @@ namespace MyShop.Application.Cart
 
         public Response Do()
         {
-            var stringObject = _session.GetString("customer-info");
+            var customerInformation = _sessionManager.GetCustomerInformation();
 
-            if (string.IsNullOrEmpty(stringObject))
+            if (customerInformation == null)
                 return null;
-
-            var customerInformation = JsonConvert.DeserializeObject<CustomerInformation>(stringObject);
 
             return new Response 
             {

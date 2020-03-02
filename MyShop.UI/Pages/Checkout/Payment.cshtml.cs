@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using MyShop.Application.Cart;
 using MyShop.Application.Orders;
 using MyShop.Database;
-using Stripe;
 
 namespace MyShop.UI.Pages.Checkout
 {
@@ -25,9 +22,9 @@ namespace MyShop.UI.Pages.Checkout
         }
         
 
-        public IActionResult OnGet()
+        public IActionResult OnGet([FromServices] GetCustomerInformation getCustomerInformation)
         {
-            var information = new GetCustomerInformation(HttpContext.Session).Do();
+            var information = getCustomerInformation.Do();
 
             if (information == null)
             {
@@ -37,9 +34,9 @@ namespace MyShop.UI.Pages.Checkout
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string stripeEmail, string stripeToken)
+        public async Task<IActionResult> OnPost([FromServices] Application.Cart.GetOrder getOrder, string stripeEmail, string stripeToken)
         {
-            var cardOrder = new Application.Cart.GetOrder(HttpContext.Session, _ctx).Do();
+            var cardOrder = getOrder.Do();
 
             var sessionId = HttpContext.Session.Id;
 

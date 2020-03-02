@@ -1,30 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Application.Cart;
 using MyShop.Database;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyShop.UI.ViewComponents
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly ApplicationDBContext _ctx;
+        private GetCart _getCart;
 
-        public CartViewComponent(ApplicationDBContext ctx)
+        public CartViewComponent(GetCart getCart)
         {
-            _ctx = ctx;
+            _getCart = getCart;
         }
-
         public IViewComponentResult Invoke(string view = "Default")
         {
             if (view == "Small")
             {
-                var totalValue = new GetCart(HttpContext.Session, _ctx).Do().Sum(x => x.RealValue * x.Qty);
+                var totalValue = _getCart.Do().Sum(x => x.RealValue * x.Qty);
                 return View(view, $"${totalValue}");
             }
-            return View(view, new GetCart(HttpContext.Session, _ctx).Do());
+            return View(view, _getCart.Do());
         }
     }
 }

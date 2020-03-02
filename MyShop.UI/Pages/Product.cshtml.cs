@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyShop.Database;
 using MyShop.Application.Products;
-using Microsoft.AspNetCore.Http;
 using MyShop.Application.Cart;
-using MyShop.Domain.Models;
 
 namespace MyShop.UI.Pages
 {
@@ -36,9 +31,9 @@ namespace MyShop.UI.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost([FromServices] AddToCart addToCart)
         {
-            var stockAdded = await new AddToCart(HttpContext.Session, _ctx).Do(CartViewModel);
+            var stockAdded = await addToCart.Do(CartViewModel);
 
             if (stockAdded)
                 return RedirectToPage("Cart");

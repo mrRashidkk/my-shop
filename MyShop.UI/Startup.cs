@@ -13,7 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using MyShop.Database;
 using Stripe;
 using Microsoft.AspNetCore.Identity;
-using MyShop.Application.UsersAdmin;
+using MyShop.Domain.Infrastructure;
+using MyShop.UI.Infrastructure;
 
 namespace MyShop.UI
 {
@@ -29,6 +30,8 @@ namespace MyShop.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -73,6 +76,9 @@ namespace MyShop.UI
                 options.Cookie.Name = "Cart";
                 options.Cookie.MaxAge = TimeSpan.FromMinutes(20);
             });
+
+            services.AddTransient<IStockManager, StockManager>();
+            services.AddScoped<ISessionManager, SessionManager>();
 
             StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             var stripeService = new PaymentIntentService();
