@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using MyShop.Database;
+
+using MyShop.Domain.Infrastructure;
 using MyShop.Domain.Models;
 
 namespace MyShop.Application.StockAdmin
 {
     public class CreateStock
     {
-        private readonly ApplicationDBContext _ctx;
+        private readonly IStockManager _stockManager;
 
-        public CreateStock(ApplicationDBContext ctx)
+        public CreateStock(IStockManager stockManager)
         {
-            _ctx = ctx;
+            _stockManager = stockManager;
         }
 
         public async Task<Response> Do(Request request)
@@ -24,8 +25,8 @@ namespace MyShop.Application.StockAdmin
                 Qty = request.Qty,
                 ProductId = request.ProductId
             };
-            _ctx.Stock.Add(stock);
-            await _ctx.SaveChangesAsync();
+
+            await _stockManager.CreateStock(stock);           
 
             return new Response
             {

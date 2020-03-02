@@ -1,22 +1,17 @@
-﻿using MyShop.Database;
-using MyShop.Domain.Models;
-using MyShop.Domain.Enums;
-using System;
-using System.Linq;
+﻿using MyShop.Domain.Enums;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.OrdersAdmin
 {
     public class GetOrders
     {
-        private readonly ApplicationDBContext _ctx;
+        private readonly IOrderManager _orderManager;
 
-        public GetOrders(ApplicationDBContext ctx)
+        public GetOrders(IOrderManager orderManager)
         {
-            _ctx = ctx;
+            _orderManager = orderManager;
         }
 
         public class Response
@@ -27,14 +22,11 @@ namespace MyShop.Application.OrdersAdmin
         }
 
         public IEnumerable<Response> Do(int status) =>
-            _ctx.Orders
-                .Where(x => x.Status == (OrderStatus)status)
-                .Select(x => new Response
-                {
-                    Id = x.Id,
-                    OrderRef = x.OrderRef,
-                    Email = x.Email
-                })
-                .ToList();
+            _orderManager.GerOrdersByStatus((OrderStatus)status, x => new Response
+            {
+                Id = x.Id,
+                OrderRef = x.OrderRef,
+                Email = x.Email
+            });            
     }
 }

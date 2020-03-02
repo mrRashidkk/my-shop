@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using MyShop.Application.Cart;
 using MyShop.Application.Orders;
-using MyShop.Database;
 
 namespace MyShop.UI.Pages.Checkout
 {
@@ -13,12 +12,9 @@ namespace MyShop.UI.Pages.Checkout
     {
         public string PublicKey { get; }
 
-        private readonly ApplicationDBContext _ctx;
-
-        public PaymentModel(IConfiguration config, ApplicationDBContext ctx)
+        public PaymentModel(IConfiguration config)
         {
             PublicKey = config["Stripe:PublicKey"].ToString();
-            _ctx = ctx;
         }
         
 
@@ -34,13 +30,13 @@ namespace MyShop.UI.Pages.Checkout
             return Page();
         }
 
-        public async Task<IActionResult> OnPost([FromServices] Application.Cart.GetOrder getOrder, string stripeEmail, string stripeToken)
+        public async Task<IActionResult> OnPost([FromServices] CreateOrder createOrder, [FromServices] Application.Cart.GetOrder getOrder, string stripeEmail, string stripeToken)
         {
             var cardOrder = getOrder.Do();
 
             var sessionId = HttpContext.Session.Id;
 
-            await new CreateOrder(_ctx).Do(new CreateOrder.Request
+            await createOrder.Do(new CreateOrder.Request
             {
                 SessionId = sessionId,
                 FirstName = cardOrder.CustomerInformation.FirstName,

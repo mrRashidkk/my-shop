@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using MyShop.Database;
+
+
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart

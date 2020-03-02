@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyShop.Database;
 using MyShop.Application.Products;
 using MyShop.Application.Cart;
 
@@ -9,20 +8,14 @@ namespace MyShop.UI.Pages
 {
     public class ProductModel : PageModel
     {
-        private readonly ApplicationDBContext _ctx;
         public GetProduct.ProductViewModel Product { get; set; }
         [BindProperty]
-        public AddToCart.Request CartViewModel { get; set; }
-        
-        public ProductModel(ApplicationDBContext ctx)
-        {
-            _ctx = ctx;
-        }
+        public AddToCart.Request CartViewModel { get; set; }        
 
 
-        public async Task<IActionResult> OnGet(string name)
+        public async Task<IActionResult> OnGet([FromServices] GetProduct getProduct, string name)
         {
-            Product = await new GetProduct(_ctx).Do(name.Replace("-", " "));
+            Product = await getProduct.Do(name.Replace("-", " "));
 
             if (Product == null)
             {

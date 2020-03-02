@@ -1,42 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using MyShop.Database;
-using MyShop.Domain.Models;
+
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.StockAdmin
 {
     public class GetStock
     {
-        private readonly ApplicationDBContext _ctx;
+        private readonly IProductManager _productManager;
 
-        public GetStock(ApplicationDBContext ctx)
+        public GetStock(IProductManager productManager)
         {
-            _ctx = ctx;
+            _productManager = productManager;
         }
 
-        public async Task<IEnumerable<ProductViewModel>> Do()
-        {
-            var stocks = await _ctx.Products
-                .Include(x => x.Stock)
-                .Select(x => new ProductViewModel
-                { 
-                    Id = x.Id,
-                    Description = x.Description,
-                    Stock = x.Stock.Select(y => new StockViewModel
-                    {
-                        Id = y.Id,
-                        Description = y.Description,
-                        Qty = y.Qty
-                    })
+        public IEnumerable<ProductViewModel> Do() =>
+            _productManager.GetProductsWithStock(x => new ProductViewModel
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Stock = x.Stock.Select(y => new StockViewModel
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Qty = y.Qty
                 })
-                .ToListAsync();
-
-            return stocks;
-        }
+            });        
 
         public class StockViewModel
         {

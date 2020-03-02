@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using MyShop.Database;
 using Microsoft.AspNetCore.Authorization;
 using MyShop.Application.UsersAdmin;
 

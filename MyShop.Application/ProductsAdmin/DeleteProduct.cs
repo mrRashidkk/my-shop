@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using MyShop.Database;
-using MyShop.Domain.Models;
+﻿using System.Threading.Tasks;
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.ProductsAdmin
 {
     public class DeleteProduct
     {
-        private ApplicationDBContext _context;
-        public DeleteProduct(ApplicationDBContext context)
+        private IProductManager _productManager;
+        public DeleteProduct(IProductManager productManager)
         {
-            _context = context;
+            _productManager = productManager;
         }
 
-        public async Task Do(int id)
+        public Task<int> Do(int id)
         {
-            var Product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
-            _context.Products.Remove(Product);
-            await _context.SaveChangesAsync();
+            return _productManager.DeleteProduct(id);
         } 
     }
 }

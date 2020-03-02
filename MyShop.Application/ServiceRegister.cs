@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
             self.AddTransient<RemoveFromCart>();
 
             self.AddTransient<CreateUser>();
+
             return self;
         }
     }

@@ -1,30 +1,23 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using MyShop.Database;
+﻿using System.Collections.Generic;
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.ProductsAdmin
 {
     public class GetProducts
     {
-        private readonly ApplicationDBContext _ctx;
-        public GetProducts(ApplicationDBContext ctx)
+        private IProductManager _productManager;
+        public GetProducts(IProductManager productManager)
         {
-            _ctx = ctx;
+            _productManager = productManager;
         }
 
-        public async Task<IEnumerable<ProductViewModel>> Do()
-        {
-            return await _ctx.Products.Select(x => new ProductViewModel
+        public IEnumerable<ProductViewModel> Do() =>
+            _productManager.GetProductsWithStock(x => new ProductViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
                 Value = x.Value
-            }).ToListAsync();
-        }
+            });        
 
         public class ProductViewModel
         {

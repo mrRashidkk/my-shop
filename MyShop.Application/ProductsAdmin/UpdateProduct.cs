@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using MyShop.Database;
-using MyShop.Domain.Models;
+﻿using System.Threading.Tasks;
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.ProductsAdmin
 {
     public class UpdateProduct
     {
-        private ApplicationDBContext _context;
-        public UpdateProduct(ApplicationDBContext context)
+        private IProductManager _productManager;
+        public UpdateProduct(IProductManager productManager)
         {
-            _context = context;
+            _productManager = productManager;
         }
 
         public async Task<Response> Do(Request request)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var product = _productManager.GetProductById(request.Id, x => x);
 
             product.Description = request.Description;
             product.Name = request.Name;
             product.Value = request.Value;
 
-            await _context.SaveChangesAsync();
+            await _productManager.UpdateProduct(product);
+            
             return new Response 
             {
                 Id = product.Id,

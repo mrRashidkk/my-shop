@@ -1,30 +1,21 @@
-﻿using MyShop.Database;
-using MyShop.Domain.Enums;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.OrdersAdmin
 {
     public class UpdateOrder
     {
-        private readonly ApplicationDBContext _ctx;
+        private readonly IOrderManager _orderManager;
 
-        public UpdateOrder(ApplicationDBContext ctx)
+        public UpdateOrder(IOrderManager orderManager)
         {
-            _ctx = ctx;
+            _orderManager = orderManager;
         }
 
-        public async Task<bool> Do(int id)
+        public Task<int> DoAsync(int id)
         {
-            var order = _ctx.Orders.FirstOrDefault(x => x.Id == id);
-
-            order.Status = order.Status + 1;
-
-            return await _ctx.SaveChangesAsync() > 0;
+            return _orderManager.AdvanceOrder(id);
         }
     }
 }
