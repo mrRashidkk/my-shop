@@ -5,6 +5,7 @@ using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.StockAdmin
 {
+    [Service]
     public class UpdateStock
     {
         private readonly IStockManager _stockManager;

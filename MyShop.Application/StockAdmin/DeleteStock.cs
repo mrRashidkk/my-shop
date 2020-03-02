@@ -3,6 +3,7 @@ using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.StockAdmin
 {
+    [Service]
     public class DeleteStock
     {
         private readonly IStockManager _stockManager;

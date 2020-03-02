@@ -2,11 +2,11 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Orders
 {
+    [Service]
     public class GetOrder
     {
         private readonly IOrderManager _orderManager;

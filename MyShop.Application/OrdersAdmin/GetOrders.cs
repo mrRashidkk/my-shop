@@ -1,10 +1,10 @@
 ﻿using MyShop.Domain.Enums;
 using System.Collections.Generic;
-
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.OrdersAdmin
 {
+    [Service]
     public class GetOrders
     {
         private readonly IOrderManager _orderManager;

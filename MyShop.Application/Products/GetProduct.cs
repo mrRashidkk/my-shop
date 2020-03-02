@@ -5,6 +5,7 @@ using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Products
 {
+    [Service]
     public class GetProduct
     {
         private readonly IProductManager _productManager;

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Threading.Tasks;
 using MyShop.Domain.Infrastructure;
 using MyShop.Domain.Models;
 
 namespace MyShop.Application.StockAdmin
 {
+    [Service]
     public class CreateStock
     {
         private readonly IStockManager _stockManager;

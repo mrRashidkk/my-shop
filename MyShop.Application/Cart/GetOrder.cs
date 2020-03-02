@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
 {
+    [Service]
     public class GetOrder
     {
         private readonly ISessionManager _sessionManager;

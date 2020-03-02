@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Application.Cart;
-using MyShop.Database;
 using System.Linq;
 
 namespace MyShop.UI.ViewComponents

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
 using MyShop.Domain.Infrastructure;
 using MyShop.Domain.Models;
 
 namespace MyShop.Application.ProductsAdmin
 {
+    [Service]
     public class CreateProduct
     {
         private IProductManager _productManager;

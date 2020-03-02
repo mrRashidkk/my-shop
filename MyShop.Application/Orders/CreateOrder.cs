@@ -1,14 +1,13 @@
-﻿
-using MyShop.Domain.Models;
+﻿using MyShop.Domain.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Orders
 {
+    [Service]
     public class CreateOrder
     {
         private IStockManager _stockManager;

@@ -3,6 +3,7 @@ using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.ProductsAdmin
 {
+    [Service]
     public class DeleteProduct
     {
         private IProductManager _productManager;

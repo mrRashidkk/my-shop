@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using MyShop.Application.Cart;
 using MyShop.Application.Orders;
+using MyShop.Domain.Infrastructure;
 
 namespace MyShop.UI.Pages.Checkout
 {
@@ -30,7 +31,12 @@ namespace MyShop.UI.Pages.Checkout
             return Page();
         }
 
-        public async Task<IActionResult> OnPost([FromServices] CreateOrder createOrder, [FromServices] Application.Cart.GetOrder getOrder, string stripeEmail, string stripeToken)
+        public async Task<IActionResult> OnPost(
+            [FromServices] CreateOrder createOrder,
+            [FromServices] Application.Cart.GetOrder getOrder, 
+            [FromServices] ISessionManager sessionManager,
+            string stripeEmail,
+            string stripeToken)
         {
             var cardOrder = getOrder.Do();
 
@@ -55,6 +61,8 @@ namespace MyShop.UI.Pages.Checkout
                 }).ToList()
 
             });
+
+            sessionManager.ClearCart();
 
             return RedirectToPage("/Index");
         }

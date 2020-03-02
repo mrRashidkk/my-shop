@@ -1,10 +1,10 @@
 ﻿using MyShop.Domain.Models;
-
 using System.Threading.Tasks;
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
 {
+    [Service]
     public class AddToCart
     {
         private ISessionManager _sessionManager;

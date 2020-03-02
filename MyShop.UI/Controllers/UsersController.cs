@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using MyShop.Application.UsersAdmin;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using MyShop.UI.ViewModels.Admin;
 
 namespace MyShop.UI.Controllers
 {
@@ -9,16 +11,26 @@ namespace MyShop.UI.Controllers
     [Authorize(Policy = "Admin")]
     public class UsersController : Controller
     {
-        private CreateUser _createUser;
-        public UsersController(CreateUser createUser)
+        private readonly UserManager<IdentityUser> _userManager;
+        public UsersController(UserManager<IdentityUser> userManager)
         {
-            _createUser = createUser;
+            _userManager = userManager;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUser.Request request)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserViewModel vm)
         {
-            await _createUser.Do(request);
+            var user = new IdentityUser()
+            {
+                UserName = vm.Username
+            };
+
+            await _userManager.CreateAsync(user, "password");
+
+            var claim = new Claim("Role", "Manager");
+
+            await _userManager.AddClaimAsync(user, claim);
+
             return Ok();
         }
         

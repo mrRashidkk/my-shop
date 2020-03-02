@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-
-
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
 {
+    [Service]
     public class GetCart
     {
         private ISessionManager _sessionManager;

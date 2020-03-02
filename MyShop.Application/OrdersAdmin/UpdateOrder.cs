@@ -4,6 +4,7 @@ using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.OrdersAdmin
 {
+    [Service]
     public class UpdateOrder
     {
         private readonly IOrderManager _orderManager;
