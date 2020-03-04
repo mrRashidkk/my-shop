@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using MyShop.UI.ViewModels.Admin;
+using MyShop.UI.ViewModels;
 
 namespace MyShop.UI.Controllers
 {
@@ -16,16 +18,18 @@ namespace MyShop.UI.Controllers
         {
             _userManager = userManager;
         }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserViewModel vm)
+        
+        [HttpPost("CreateManager")]
+        public async Task<IActionResult> CreateManager([FromBody] CreateUserViewModel vm)
         {
             var user = new IdentityUser()
             {
                 UserName = vm.Username
             };
+            string hash = new PasswordHasher<IdentityUser>().HashPassword(user, vm.Password);
+            user.PasswordHash = hash;
 
-            await _userManager.CreateAsync(user, "password");
+            await _userManager.CreateAsync(user);
 
             var claim = new Claim("Role", "Manager");
 
@@ -33,6 +37,6 @@ namespace MyShop.UI.Controllers
 
             return Ok();
         }
-        
+
     }
 }

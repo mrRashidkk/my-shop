@@ -8,6 +8,7 @@
         productModel: {
             id: 0,
             name: "Product name",
+            category: "Shoes",
             description: "Product description",
             value: 1.99
         }
@@ -22,6 +23,7 @@
                     this.productModel = {
                         id: product.id,
                         name: product.name,
+                        category: product.category,
                         description: product.description,
                         value: product.value
                     }

@@ -1,0 +1,76 @@
+﻿@page
+@model MyShop.UI.ViewModels.SignUpViewModel
+@{
+}
+
+    <div class="container">
+        <div class="column is-6 is-offset-3">
+            <form method="post" asp-controller="Account" asp-action="Signup">
+
+                <div class="field">
+                    <label class="label">User name</label>
+                    <div class="control">
+                        <input class="input" asp-for="@Model.Username" />
+                        <span asp-validation-for="@Model.Username" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" asp-for="@Model.Email" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Phone number</label>
+                    <div class="control">
+                        <input class="input" asp-for="@Model.PhoneNumber" />
+                        <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" asp-for="@Model.Password" />
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                </div>                
+
+                <div class="field">
+                    <div class="control has-text-right">
+                        <button type="submit" class="button is-link">Sign up</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>  
+
+    @*<form method="post" asp-controller="Account" asp-action="Signup">
+        <div class="form-group">
+            <label asp-for="@Model.Username" class="control-label"></label>
+            <input asp-for="@Model.Username" class="form-control" />
+            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Email" class="control-label"></label>
+            <input asp-for="@Model.Email" class="form-control" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PhoneNumber" class="control-label"></label>
+            <input asp-for="@Model.PhoneNumber" class="form-control" />
+            <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Password" class="control-label"></label>
+            <input asp-for="@Model.Password" class="form-control" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Sign up" />
+        </div>        
+    </form>*@

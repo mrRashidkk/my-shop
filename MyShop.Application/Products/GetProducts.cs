@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using MyShop.Domain.Infrastructure;
+using MyShop.Domain.Models;
+using System;
+using System.Linq.Expressions;
 
 namespace MyShop.Application.Products
 {
@@ -13,8 +16,8 @@ namespace MyShop.Application.Products
             _productManager = productManager;
         }
 
-        public IEnumerable<ProductViewModel> Do() =>
-            _productManager.GetProductsWithStock(x => new ProductViewModel
+        public IEnumerable<ProductViewModel> Do(string category, string search) =>
+            _productManager.GetProductsWithStock(category, search, x => new ProductViewModel
             {
                 Name = x.Name,
                 Description = x.Description,

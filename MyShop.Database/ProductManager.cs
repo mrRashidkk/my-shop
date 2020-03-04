@@ -64,6 +64,18 @@ namespace MyShop.Database
                 .ToList();
         }
 
-        
+        public IEnumerable<TResult> GetProductsWithStock<TResult>(string category, string search, Func<Product, TResult> selector)
+        {
+            var products = _ctx.Products
+                .Include(x => x.Stock)
+                .Where(x => x.Category == category);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                products = products.Where(x => x.Name.IndexOf(search, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            }
+
+            return products.Select(selector).ToList();
+        }
     }
 }

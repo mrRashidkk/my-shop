@@ -13,18 +13,57 @@
             </ul>
         </div>
         <div v-if="orders.length > 0">
-            <p v-for="order in orders">
-                <a @@click="selectOrder(order.id)">{{order.orderRef}} - {{order.email}}</a>
-            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order reference</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Post code</th>
+                    </tr>
+                </thead>  
+                <tr v-for="order in orders" @@click="selectOrder(order.id)">
+                    <td>{{order.orderRef}}</td>
+                    <td>{{order.lastName}} {{order.firstName}}</td>
+                    <td>{{order.email}}</td>
+                    <td>{{order.address1}}</td>
+                    <td>{{order.postCode}}</td>
+                </tr>
+            </table>            
         </div>
     </div>
     <div v-else>
+        <table class="table is-bordered">
+            <tr>
+                <td class="subtitle">Order reference</td>
+                <td>{{selectedOrder.orderRef}}</td>
+            </tr>
+            <tr>
+                <td class="subtitle">Last name</td>
+                <td>{{selectedOrder.lastName}}</td>
+            </tr>
+            <tr>
+                <td class="subtitle">First name</td>
+                <td>{{selectedOrder.firstName}}</td>
+            </tr>
+            <tr>
+                <td class="subtitle">Email</td>
+                <td>{{selectedOrder.email}}</td>
+            </tr>
+            <tr>
+                <td class="subtitle">Address</td>
+                <td>{{selectedOrder.address1}}</td>
+            </tr>
+            <tr>
+                <td class="subtitle">Post code</td>
+                <td>{{selectedOrder.postCode}}</td>
+            </tr>
+        </table>        
         <p>
-            <button @@click="exitOrder()">Exit</button>
-        </p>
-        <p class="title">{{selectedOrder.orderRef}}</p>
-        <p class="subtitle">{{selectedOrder.email}}</p>
-        <button @@click="updateOrder()">Process</button>
+            <button class="button is-link" @@click="exitOrder()">Exit</button>
+            <button class="button is-success" @@click="updateOrder()">Process</button>
+        </p>        
     </div>
 </div>
 

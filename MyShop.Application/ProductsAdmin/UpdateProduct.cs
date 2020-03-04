@@ -17,6 +17,7 @@ namespace MyShop.Application.ProductsAdmin
             var product = _productManager.GetProductById(request.Id, x => x);
 
             product.Description = request.Description;
+            product.Category = request.Category;
             product.Name = request.Name;
             product.Value = request.Value;
 
@@ -25,7 +26,8 @@ namespace MyShop.Application.ProductsAdmin
             return new Response 
             {
                 Id = product.Id,
-                Name = product.Name,
+                Name = product.Name, 
+                Category = product.Category,
                 Description = product.Description,
                 Value = product.Value
             };
@@ -35,6 +37,7 @@ namespace MyShop.Application.ProductsAdmin
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public string Category { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
         }
@@ -43,6 +46,7 @@ namespace MyShop.Application.ProductsAdmin
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public string Category { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
         }

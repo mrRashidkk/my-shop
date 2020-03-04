@@ -3,17 +3,49 @@
 @{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+<h2 class="title has-text-centered">Contact</h2>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="columns">
+    <div class="column is-6">
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            425.555.0100
+        </address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        <address>
+            <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+    </div>
+    <div class="column is-6">
+        <form method="post">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" asp-for="Input.Name" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" asp-for="Input.Email" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Message</label>
+                <div class="control">
+                    <textarea class="textarea" asp-for="Input.Message"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control has-text-right">
+                    <button type="submit" class="button is-link">Send</button>
+                </div>
+            </div>
+        </form>        
+    </div>
+</div>
+
+

@@ -7,15 +7,20 @@ namespace MyShop.UI.Pages
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        public GetProducts.ProductViewModel Product { get; set; }
+        //[BindProperty]
+        //public GetProducts.ProductViewModel Product { get; set; }
 
-        public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
-        
+        //public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
 
-        public void OnGet([FromServices] GetProducts getProducts)
+
+        public void OnGet()
         {
-            Products = getProducts.Do();
-        }        
+            //Products = getProducts.Do();
+        }
+
+        public JsonResult OnGetProducts([FromServices] GetProducts getProducts, string category, string search)
+        {
+            return new JsonResult(getProducts.Do(category, search));
+        }
     }
 }
