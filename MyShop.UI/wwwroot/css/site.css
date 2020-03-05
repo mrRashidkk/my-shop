@@ -2,6 +2,68 @@
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
  */
+
+body {
+    min-height: 100vh;
+    background-color: #e6e6e6;
+}
+.navbar,
+.footer {
+    background-color: #4f4f4f;
+}
+.navbar-item, .navbar-link {
+    color: white;
+}
+.footer {
+    color: white;
+}
+
+ul.social-in {
+    text-align: right;
+    padding: 1em;
+    background: #222222;
+}
+
+ul.social-in li {
+    display: inline-block;
+}
+
+ul.social-in li i {
+    background: url(../images/img-sprite.png)no-repeat -16px -182px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0 3px;
+}
+
+ul.social-in li i.youtube {
+    background-position: -114px -182px;
+}
+
+ul.social-in li i.facebook {
+    background-position: -211px -182px;
+}
+
+ul.social-in li i.twitter {
+    background-position: -309px -182px;
+}
+
+ul.social-in li i:hover {
+    background-position: -65px -182px;
+}
+
+ul.social-in li i.youtube:hover {
+    background-position: -164px -182px;
+}
+
+ul.social-in li i.facebook:hover {
+    background-position: -259px -182px;
+}
+
+ul.social-in li i.twitter:hover {
+    background-position: -356px -182px;
+}
+
 .StripeElement {
     box-sizing: border-box;
     height: 40px;
@@ -28,4 +90,17 @@
 
 .align-self-center {
     align-self: center;
+}
+
+.article-preview {
+    padding: 10px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.4);
+}
+
+.article-img {
+    float: left;
+    width: 300px;
 }

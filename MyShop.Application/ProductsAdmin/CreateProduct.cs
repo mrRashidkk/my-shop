@@ -20,7 +20,9 @@ namespace MyShop.Application.ProductsAdmin
             {
                 Name = request.Name,
                 Description = request.Description,
-                Value = request.Value
+                Value = request.Value,
+                Category = request.Category,
+                ImageName = request.ImageName
             };
 
             if (await _productManager.CreateProduct(product) <= 0)
@@ -42,6 +44,8 @@ namespace MyShop.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+            public string Category { get; set; }
+            public string ImageName { get; set; }
         }
 
         public class Response

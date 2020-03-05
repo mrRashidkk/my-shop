@@ -5,6 +5,7 @@
         editing: false,
         loading: false,
         products: [],
+        image: "",
         productModel: {
             id: 0,
             name: "Product name",
@@ -13,7 +14,17 @@
             value: 1.99
         }
     },
+    computed: {
+        imageName: function () {
+            if (this.image != null && this.image != "") {
+                return this.image.name;
+            }
+        }
+    },
     methods: {
+        handleFileUpload() {
+            this.image = this.$refs.image.files[0];
+        },
         getProduct(id) {
             this.loading = true;
             axios.get('/products/' + id)
@@ -51,7 +62,19 @@
         },
         createProduct() {
             this.loading = true;
-            axios.post('/products', this.productModel)
+
+            var formData = new FormData();
+            formData.append("name", this.productModel.name);
+            formData.append("category", this.productModel.category);
+            formData.append("description", this.productModel.description);
+            formData.append("value", this.productModel.value);
+            formData.append("image", this.image);
+
+            axios.post('/products', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then(res => {
                     console.log(res);
                     this.products.push(res.data);

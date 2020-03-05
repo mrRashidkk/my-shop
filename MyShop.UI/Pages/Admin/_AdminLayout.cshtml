@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyShop.UI</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
         <link href="~/lib/bulma-0.8.0/css/bulma.css" rel="stylesheet" />
@@ -13,6 +13,7 @@
     <environment exclude="Development">
         <link href="~/lib/bulma-0.8.0/css/bulma.min.css" rel="stylesheet" />
     </environment>
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <h3 class="title has-text-centered">Admin panel</h3>
@@ -28,6 +29,7 @@
                             <li><a asp-page="/Admin/Index">Products</a></li>
                             <li><a asp-page="/Admin/OrderManagement">Order management</a></li>
                             <li><a asp-page="/Admin/Stock">Stock</a></li>
+                            <li><a asp-page="/Admin/ArticlesManagement">Articles management</a></li>
                         </ul>
                     }
 

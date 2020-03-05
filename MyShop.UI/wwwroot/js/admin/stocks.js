@@ -10,6 +10,9 @@
         products: []
     },
     methods: {
+        cancel() {
+            this.selectedProduct = null;
+        },
         getStock() {
             this.loading = true;
             axios.get('/Stocks')

@@ -18,6 +18,8 @@ namespace MyShop.Application.StockAdmin
             _productManager.GetProductsWithStock(x => new ProductViewModel
             {
                 Id = x.Id,
+                Name = x.Name,
+                Category = x.Category,
                 Description = x.Description,
                 Stock = x.Stock.Select(y => new StockViewModel
                 {
@@ -37,6 +39,8 @@ namespace MyShop.Application.StockAdmin
         public class ProductViewModel
         {
             public int Id { get; set; }
+            public string Name { get; set; }
+            public string Category { get; set; }
             public string Description { get; set; }
             public IEnumerable<StockViewModel> Stock { get; set; }
         }

@@ -6,7 +6,10 @@
         search: "",
         products: []
     },
-    methods: {        
+    methods: { 
+        getImagePath(product) {
+            return "/images/products/" + product.imageName;
+        },
         getProducts() {
             this.loading = true;
             axios.get(`/Index?handler=Products&category=${this.category}&search=${this.search}`)

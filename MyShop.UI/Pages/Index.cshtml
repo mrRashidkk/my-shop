@@ -4,56 +4,57 @@
     ViewData["Title"] = "Catalog";
 }
 
-<div id="app" class="section">
-    <div class="field is-horizontal">
-        <div class="field-body">
-            <div class="field">
-                <div class="control">
-                    <div class="select">
-                        <select v-model="category" @@change="getProducts">
-                            <option value="Shoes">Shoes</option>
-                            <option value="T-Shirts">T-Shirts</option>
-                            <option value="Trousers">Trousers</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <input v-model="search" class="input" style="width: 80%" type="text" />
-                    <button class="button is-primary" style="width: 15%" @@click="getProducts">Search</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="columns is-multiline is-mobile">
-
-        <div v-for="(product, index) in products" class="column is-3-desktop">
-            <a :href="'Product/' + product.name.replace(' ', '-')">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="~/images/item.jpg" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div v-if="product.stockCount <= 10" :class="getClass(product)">
-                            {{ product.stockCount == 0 ? "Out of stock" : "Low on stock" }}
+    <div id="app" class="section">
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <div class="select">
+                            <select v-model="category" @@change="getProducts">
+                                <option value="Shoes">Shoes</option>
+                                <option value="T-Shirts">T-Shirts</option>
+                                <option value="Trousers">Trousers</option>
+                            </select>
                         </div>
-                        <p class="title is-size-5">
-                            {{product.name}} {{product.value}}
-                        </p>
-                        <p class="subtitle">
-                            {{product.description}}
-                        </p>
                     </div>
                 </div>
-            </a>
-        </div>
+                <div class="field">
+                    <div class="control">
+                        <input v-model="search" class="input" style="width: 80%" type="text" />
+                        <button class="button is-primary" style="width: 15%" @@click="getProducts">Search</button>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+        <div v-if="products.length > 0" class="columns is-multiline is-mobile">
+            <div v-for="(product, index) in products" class="column is-3-desktop">
+                <a :href="'Product/' + product.name.replace(' ', '-')">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img :src="getImagePath(product)" />
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div v-if="product.stockCount <= 10" :class="getClass(product)">
+                                {{ product.stockCount == 0 ? "Out of stock" : "Low on stock" }}
+                            </div>
+                            <p class="title is-size-5">
+                                {{product.name}} {{product.value}}
+                            </p>
+                            <p class="subtitle">
+                                {{product.description}}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div v-else>
+            <h2 class="title has-text-centered">Sorry, but nothing found...</h2>
+        </div>
     </div>
-</div>
 
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

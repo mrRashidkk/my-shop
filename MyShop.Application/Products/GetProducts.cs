@@ -22,7 +22,8 @@ namespace MyShop.Application.Products
                 Name = x.Name,
                 Description = x.Description,
                 Value = x.Value.GetValueString(),
-                StockCount = x.Stock.Sum(y => y.Qty)
+                StockCount = x.Stock.Sum(y => y.Qty),
+                ImageName = x.ImageName
             });
         
         public class ProductViewModel
@@ -31,6 +32,7 @@ namespace MyShop.Application.Products
             public string Description { get; set; }
             public string Value { get; set; }
             public int StockCount { get; set; }
+            public string ImageName { get; set; }
         }
     }    
 }

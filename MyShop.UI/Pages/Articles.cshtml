@@ -3,10 +3,35 @@
 @{
 }
 
-<div class="columns">
-    <div class="column is-6"></div>
-    <div class="column is-6"></div>
-</div>
+    <div class="section" id="app">
+        <div class="columns">
+            <div class="column is-4" v-if="articles.length > 0">
+                <div v-for="article in articles" :key="article.id" @@click="selectArticle(article)" class="article-preview">
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-128x128">
+                                <img :src="getImagePath(article)" />
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <p class="subtitle">{{article.title}}</p>
+                            </div>
+                        </div>
+                    </article>
+                    <div class="level">
+                        <p>{{article.preview}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-8" v-if="selectedArticle != null">
+                <h1 class="title">{{selectedArticle.title}}</h1>
+                <img :src="getImagePath(selectedArticle)" class="article-img" />
+                <p>{{selectedArticle.text}}</p>
+            </div>
+        </div>
+    </div>
+
 
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

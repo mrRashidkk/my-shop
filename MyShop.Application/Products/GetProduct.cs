@@ -26,6 +26,7 @@ namespace MyShop.Application.Products
                 Name = x.Name,
                 Description = x.Description,
                 Value = x.Value.GetValueString(),
+                ImageName = x.ImageName,
                 Stock = x.Stock.Select(y => new StockViewModel
                 {
                     Id = y.Id,
@@ -40,6 +41,7 @@ namespace MyShop.Application.Products
             public string Name { get; set; }
             public string Description { get; set; }
             public string Value { get; set; }
+            public string ImageName { get; set; }
             public IEnumerable<StockViewModel> Stock { get; set; }
         }
 

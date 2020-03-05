@@ -13,6 +13,7 @@ namespace MyShop.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderStock> OrderStocks { get; set; }
         public DbSet<StockOnHold> StocksOnHold { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

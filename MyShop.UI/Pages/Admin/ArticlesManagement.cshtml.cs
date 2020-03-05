@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MyShop.UI.Pages
+namespace MyShop.UI.Pages.Admin
 {
-    public class NewsModel : PageModel
+    public class ArticlesManagementModel : PageModel
     {
         public void OnGet()
         {
