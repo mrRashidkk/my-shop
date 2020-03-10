@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MyShop.Application.Products;
 using MyShop.Domain.Infrastructure;
 
 namespace MyShop.Application.Cart
@@ -7,10 +8,12 @@ namespace MyShop.Application.Cart
     public class GetCart
     {
         private ISessionManager _sessionManager;
+        private readonly IProductManager _productManager;
 
-        public GetCart(ISessionManager sessionManager)
+        public GetCart(ISessionManager sessionManager, IProductManager productManager)
         {
             _sessionManager = sessionManager;
+            _productManager = productManager;
         }
 
         public class Response
@@ -20,6 +23,7 @@ namespace MyShop.Application.Cart
             public decimal RealValue { get; set; }
             public int StockId { get; set; }
             public int Qty { get; set; }
+            public string ImageName { get; set; }
         }
 
         public  IEnumerable<Response> Do()
@@ -30,7 +34,8 @@ namespace MyShop.Application.Cart
                 Value = x.Value.GetValueString(),
                 RealValue = x.Value,
                 StockId = x.StockId,
-                Qty = x.Qty
+                Qty = x.Qty,
+                ImageName = x.ImageName
             });
         }
     }

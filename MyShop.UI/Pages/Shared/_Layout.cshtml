@@ -64,17 +64,24 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content min-800">
         @RenderBody()
     </div>
 
-    <footer class="footer">
-        <ul class="social-in">
-            <li><a href="#"><i> </i></a></li>
-            <li><a href="#"><i class="youtube"> </i></a></li>
-            <li><a href="#"><i class="facebook"> </i></a></li>
-            <li><a href="#"><i class="twitter"> </i></a></li>
-        </ul>
+    <footer class="footer is-paddingless">
+        <div class="columns">
+            <div class="column is-6 is-offset-2">
+                <p class="has-text-centered">© 1997–2020 ООО «Bamba sport». Все права защищены. «Bamba sport» является зарегистрированным товарным знаком The Sport & Fashion Management, Pte</p>
+            </div>
+            <div class="column is-4">
+                <ul class="social-in">
+                    <li><a href="#"><i> </i></a></li>
+                    <li><a href="#"><i class="youtube"> </i></a></li>
+                    <li><a href="#"><i class="facebook"> </i></a></li>
+                    <li><a href="#"><i class="twitter"> </i></a></li>
+                </ul>
+            </div>
+        </div>               
     </footer>
 
     <environment include="Development">

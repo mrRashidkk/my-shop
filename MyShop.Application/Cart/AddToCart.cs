@@ -39,7 +39,8 @@ namespace MyShop.Application.Cart
                 ProductName = stock.Product.Name,
                 StockId = stock.Id,
                 Qty = request.Qty,                
-                Value = stock.Product.Value
+                Value = stock.Product.Value,
+                ImageName = stock.Product.ImageName
             };
 
             _sessionManager.AddProduct(cartProduct);            

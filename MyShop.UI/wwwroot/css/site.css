@@ -7,14 +7,14 @@ body {
     min-height: 100vh;
     background-color: #e6e6e6;
 }
-.navbar,
-.footer {
+.navbar {
     background-color: #4f4f4f;
 }
 .navbar-item, .navbar-link {
     color: white;
 }
 .footer {
+    background: #222222;
     color: white;
 }
 
@@ -103,4 +103,23 @@ ul.social-in li i.twitter:hover {
 .article-img {
     float: left;
     width: 300px;
+}
+
+.fixed-image {
+    width: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.product-image {
+    width: auto !important;
+    height: auto !important;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.min-800 {
+    min-height: 800px !important;
 }

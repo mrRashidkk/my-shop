@@ -31,9 +31,9 @@
             <div v-for="(product, index) in products" class="column is-3-desktop">
                 <a :href="'Product/' + product.name.replace(' ', '-')">
                     <div class="card">
-                        <div class="card-image">
+                        <div class="card-image" style="padding-top: 10px;">
                             <figure class="image is-4by3">
-                                <img :src="getImagePath(product)" />
+                                <img :src="getImagePath(product)" class="fixed-image" />
                             </figure>
                         </div>
                         <div class="card-content">
@@ -43,7 +43,7 @@
                             <p class="title is-size-5">
                                 {{product.name}} {{product.value}}
                             </p>
-                            <p class="subtitle">
+                            <p>
                                 {{product.description}}
                             </p>
                         </div>

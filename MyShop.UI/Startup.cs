@@ -10,9 +10,7 @@ using MyShop.Database;
 using Stripe;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
-using FluentValidation;
-using MyShop.Application.Cart;
-using MyShop.UI.ValidationContexts;
+using WebEssentials.AspNetCore.Pwa;
 
 namespace MyShop.UI
 {
@@ -86,6 +84,8 @@ namespace MyShop.UI
             stripeService.Create(stripeOptions);
 
             services.AddApplicationServices();
+
+            //services.AddProgressiveWebApp();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

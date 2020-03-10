@@ -11,5 +11,6 @@ namespace MyShop.Domain.Models
         public int StockId { get; set; }
         public int Qty { get; set; }
         public decimal Value { get; set; }
+        public string ImageName { get; set; }
     }
 }

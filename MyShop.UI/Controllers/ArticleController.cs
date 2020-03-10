@@ -8,8 +8,7 @@ using MyShop.Application.ArticlesAdmin;
 
 namespace MyShop.UI.Controllers
 {
-    [Route("[controller]")]
-    [Authorize(Policy = "Admin")]
+    [Route("[controller]")]    
     public class ArticleController : Controller
     {
         private IHostingEnvironment _env;
@@ -18,7 +17,8 @@ namespace MyShop.UI.Controllers
         {
             _env = env;
         }
-        
+
+        [Authorize(Policy = "Admin")]
         [HttpPost("CreateArticle")]
         public async Task<IActionResult> CreateArticle([FromServices] CreateArticle createArticle)
         {

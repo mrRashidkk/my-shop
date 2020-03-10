@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<MyShop.Application.Cart.GetCart.Response>
 
-    <div class="column is-8 is-offset-3" id="cart-main">
+    <div class="column is-12" id="cart-main">
         @foreach (var product in Model)
         {
             <div class="level">
                 <div class="level-item">
                     <figure class="image is-128x128">
-                        <img src="~/images/item.jpg" />
+                        <img src="~/images/products/@product.ImageName" />
                     </figure>
                 </div>
                 <div class="level-item">
