@@ -11,6 +11,7 @@ using Stripe;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using WebEssentials.AspNetCore.Pwa;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace MyShop.UI
 {
@@ -85,12 +86,20 @@ namespace MyShop.UI
 
             services.AddApplicationServices();
 
-            //services.AddProgressiveWebApp();
+            services.AddProgressiveWebApp(new PwaOptions
+            {
+                Strategy = ServiceWorkerStrategy.CacheFirstSafe
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // remove fingerprint (?v=...) from URL
+            var rewriteOptions = new RewriteOptions()
+                .AddRewrite(@"([\S]+)(\?v\=\w+)", "$1", skipRemainingRules: true);
+            app.UseRewriter(rewriteOptions);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -106,7 +115,7 @@ namespace MyShop.UI
             app.UseCookiePolicy();
             app.UseSession();
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvcWithDefaultRoute();            
         }
     }
 }

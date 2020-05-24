@@ -8,12 +8,12 @@
     <title>@ViewData["Title"]</title>
 
     <environment include="Development">
-        <link href="~/lib/bulma-0.8.0/css/bulma.css" rel="stylesheet" />
+        <link href="@Url.AddFingerPrint("~/lib/bulma-0.8.0/css/bulma.css")" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
-        <link href="~/lib/bulma-0.8.0/css/bulma.min.css" rel="stylesheet" />
+        <link href="@Url.AddFingerPrint("~/lib/bulma-0.8.0/css/bulma.min.css")" rel="stylesheet" />
     </environment>
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="@Url.AddFingerPrint("~/css/site.css")" rel="stylesheet" />
 </head>
 <body>
     <h3 class="title has-text-centered">Admin panel</h3>
